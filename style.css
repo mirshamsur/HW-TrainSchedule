@@ -1,0 +1,18 @@
+.content-wrapper{
+	width:100%;
+	transition:padding 0.15s;
+}
+
+h2,p{
+	background:#794438;
+	
+	color: white;
+}
+
+
+
+h3{
+	text-align:left;
+	font-weight: bold;
+}
+

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Firebase:Train Schedule</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+          <link rel="stylesheet" href="JuneSat.css">
+
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+<h2>Anytime is Train Time</h2>
+<p>Choo Choo. Choo Chee.</p> 
+  </div>
+  
+
+<div class="container-fluid container-limited">
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-12">
+
+      
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Train Schedule</h3>
+  </div>
+  <div class="panel-body">
+    <table id="trainTable" style="width:100%">
+  <tr>
+    <th>Train Name</th>
+    <th>Destination</th> 
+    <th>Frequency(min)</th>
+    <th>Next Arrival</th>
+    <th>Minitues Away</th> 
+    
+  </tr>
+  </table>
+
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Train Schedule</h3>
+  </div>
+  <div class="panel-body">
+Train Name <input id="trainName"> 
+Destination <input id="destination"> 
+First Train Time(HH-mm-military time)<input id="firstTime">
+Frequency <input id="frequency">
+
+
+  <button id="submit">Submit</button>
+
+     </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script>
+
+ 
+ var config = {
+apiKey: "AIzaSyAyEYfB4dZhwXaVm94Mbt-PsyoFvLg1psY",
+ authDomain: "my-first-firebase-projec-8ae47.firebaseapp.com",
+  databaseURL: "https://my-first-firebase-projec-8ae47.firebaseio.com",
+ projectId: "my-first-firebase-projec-8ae47",
+  storageBucket: "my-first-firebase-projec-8ae47.appspot.com",
+   messagingSenderId: "347646665381"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+$("#submit").on("click", function() {
+    var trainName = $("#trainName").val();
+    
+    var destination = $("#destination").val();
+    var frequency = $("#frequency").val();
+   var firstTime = $("#firstTime").val();
+    database.ref().set({
+      trainName: trainName,
+      destination: destination,
+      firstTime: firstTime,
+      frequency: frequency,
+      
+    });
+
+    var nextArrival=0;
+    var minutesAway=0;
+    var newRow = $("<tr>");
+    newRow.append("<td>" + trainName + "</td>");
+   
+    newRow.append("<td>" + destination + "</td>");
+
+    newRow.append("<td>" + frequency + "</td>");
+    
+    
+    newRow.append("<td>" + nextArrival + "</td>");
+  
+    
+    newRow.append("<td>" + minutesAway + "</td>");
+
+ $("#trainTable").append(newRow);
+
+   
+});
+
+
+    
+  </script>
+
+</body>
+</html>
+ 
